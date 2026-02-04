@@ -16,6 +16,12 @@ import {
   STRIPE_API_KEY,
   STRIPE_WEBHOOK_SECRET,
   WORKER_MODE,
+  S3_FILE_URL,
+  S3_ACCESS_KEY_ID,
+  S3_SECRET_ACCESS_KEY,
+  S3_REGION,
+  S3_BUCKET,
+  S3_ENDPOINT,
   MINIO_ENDPOINT,
   MINIO_ACCESS_KEY,
   MINIO_SECRET_KEY,
@@ -55,7 +61,22 @@ const medusaConfig = {
       resolve: '@medusajs/file',
       options: {
         providers: [
-          ...(MINIO_ENDPOINT && MINIO_ACCESS_KEY && MINIO_SECRET_KEY ? [{
+          // Priority: R2 > MinIO > Local
+          ...(S3_ACCESS_KEY_ID && S3_SECRET_ACCESS_KEY && S3_BUCKET && S3_ENDPOINT ? [{
+            resolve: '@medusajs/file-s3',
+            id: 's3',
+            options: {
+              file_url: S3_FILE_URL,
+              access_key_id: S3_ACCESS_KEY_ID,
+              secret_access_key: S3_SECRET_ACCESS_KEY,
+              region: S3_REGION,
+              bucket: S3_BUCKET,
+              endpoint: S3_ENDPOINT,
+              // Additional S3-compatible options for R2
+              s3ForcePathStyle: true,
+              signatureVersion: 'v4'
+            }
+          }] : MINIO_ENDPOINT && MINIO_ACCESS_KEY && MINIO_SECRET_KEY ? [{
             resolve: './src/modules/minio-file',
             id: 'minio',
             options: {
