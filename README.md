@@ -16,13 +16,13 @@
 </p>
 
 <h2 align="center">
-  Prebaked medusajs 2.0 monorepo
+  Prebaked medusajs 2.0 Headless Backend
 </h2>
 <h4 align="center">
-  Backend + Storefront + postgres + redis + MinIO + MeiliSearch
+  Backend + postgres + redis + MinIO + MeiliSearch + Cloudflare R2
 </h4>
 <p align="center">
-Combine Medusa's modules for your commerce backend with the newest Next.js 14 features for a performant storefront.</p>
+Headless commerce backend powered by Medusa's modules - ready for any frontend integration.</p>
 
 <h2 align="center">
   Need help?<br>
@@ -37,7 +37,7 @@ Combine Medusa's modules for your commerce backend with the newest Next.js 14 fe
 
 
 ## About this boilerplate
-This boilerplate is a monorepo consisting of the officially released MedusaJS 2.0 backend and storefront application. It is a pre-configured, ready-to-deploy solution, modified for seamless deployment on [railway.app](https://railway.app?referralCode=-Yg50p).
+This boilerplate is a headless MedusaJS 2.0 backend application. It is a pre-configured, ready-to-deploy solution, modified for seamless deployment on [railway.app](https://railway.app?referralCode=-Yg50p). Use it with any frontend framework of your choice.
 
 Updated: to `version 2.12.1` 🥳
 
@@ -47,10 +47,11 @@ Updated: to `version 2.12.1` 🥳
 
 ## Preconfigured 3rd party integrations
 
-- MinIO file storage: Replaces local file storage with MinIO cloud storage, automatically creating a 'medusa-media' bucket for your media files. [README](backend/src/modules/minio-file/README.md)
-- Resend email integration [Watch setup video](https://youtu.be/pbdZm26YDpE?si=LQTHWeZMLD4w3Ahw) - special thanks to [aleciavogel](https://github.com/aleciavogel) for Resend notification service, and react-email implementation! [README](backend/src/modules/email-notifications/README.md)
-- Stripe payment service: [Watch setup video](https://youtu.be/dcSOpIzc1Og)
-- Meilisearch integration by [Rokmohar](https://github.com/rokmohar/medusa-plugin-meilisearch): Adds powerful product search capabilities to your store. When deployed on Railway using the template, MeiliSearch is automatically configured. (For non-railway'ers: [Watch setup video](https://youtu.be/hrXcc5MjApI))
+- **Cloudflare R2 storage**: Primary file storage option using S3-compatible API (Priority: R2 > MinIO > Local)
+- **MinIO file storage**: Replaces local file storage with MinIO cloud storage, automatically creating a 'medusa-media' bucket for your media files. [README](backend/src/modules/minio-file/README.md)
+- **Resend email integration** [Watch setup video](https://youtu.be/pbdZm26YDpE?si=LQTHWeZMLD4w3Ahw) - special thanks to [aleciavogel](https://github.com/aleciavogel) for Resend notification service, and react-email implementation! [README](backend/src/modules/email-notifications/README.md)
+- **Stripe payment service**: [Watch setup video](https://youtu.be/dcSOpIzc1Og)
+- **Meilisearch integration** by [Rokmohar](https://github.com/rokmohar/medusa-plugin-meilisearch): Adds powerful product search capabilities to your store. When deployed on Railway using the template, MeiliSearch is automatically configured. (For non-railway'ers: [Watch setup video](https://youtu.be/hrXcc5MjApI))
 
 # local setup
 
@@ -67,7 +68,7 @@ Video instructions: https://youtu.be/PPxenu7IjGM
 ### requirements
 - **postgres database** (Automatic setup when using the Railway template)
 - **redis** (Automatic setup when using the Railway template) - fallback to simulated redis.
-- **MinIO storage** (Automatic setup when using the Railway template) - fallback to local storage.
+- **File storage** (Optional): Cloudflare R2 > MinIO > Local storage.
 - **Meilisearch** (Automatic setup when using the Railway template)
 
 ### commands
@@ -77,19 +78,20 @@ Video instructions: https://youtu.be/PPxenu7IjGM
 `npm run dev` or `pnpm dev` will start the backend (and admin dashboard frontend on `localhost:9000/app`) in development mode.
 `pnpm build && pnpm start` will compile the project and run from compiled source. This can be useful for reproducing issues on your cloud instance.
 
-## Storefront
-Video instructions: https://youtu.be/PPxenu7IjGM
+## Frontend Integration
 
-- `cd storefront/
-- Install dependencies `npm i` or `pnpm i`
-- Rename `.env.local.template` ->  `.env.local`
+This is a headless backend - you can integrate it with any frontend framework:
+- Next.js
+- React
+- Vue
+- React Native
+- Flutter
+- Or any other client that can communicate with REST/GraphQL APIs
 
-### requirements
-- A running backend on port 9000 is required to fetch product data and other information needed to build Next.js pages.
-
-### commands
-`cd storefront/`
-`npm run dev` or `pnpm dev` will run the storefront on uncompiled code, with hot-reloading as files are saved with changes.
+The backend exposes APIs at:
+- Admin API: `http://localhost:9000/admin`
+- Store API: `http://localhost:9000/store`
+- Admin Dashboard: `http://localhost:9000/app`
 
 ## Useful resources
 - How to setup credit card payment with Stripe payment module: https://youtu.be/dcSOpIzc1Og
