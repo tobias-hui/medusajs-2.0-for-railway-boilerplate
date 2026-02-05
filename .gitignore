@@ -1,2 +1,86 @@
-.idea/
+# Dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Environment variables
 .env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env*.local
+
+# IDE and Editor files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+*.sublime-project
+*.sublime-workspace
+
+# Build outputs
+dist/
+build/
+.medusa/
+.medusa-copy/
+*.tsbuildinfo
+.cache/
+
+# Logs
+logs/
+*.log
+
+# Runtime data
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+.nyc_output/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Database files
+*.sql
+*.sqlite
+*.sqlite3
+*.db
+
+# Uploads and static files
+uploads/
+static/
+
+# OS files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Package manager locks (uncomment if you want to ignore them)
+# package-lock.json
+# yarn.lock
+# pnpm-lock.yaml
+
+# Testing
+.jest/
+*.test.js.snap
+
+# Misc
+*.bak
+*.cache
+.eslintcache
