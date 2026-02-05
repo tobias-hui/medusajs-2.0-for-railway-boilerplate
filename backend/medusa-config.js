@@ -61,9 +61,9 @@ const medusaConfig = {
       resolve: '@medusajs/file',
       options: {
         providers: [
-          // Priority: R2 > MinIO > Local
+          // Priority: Custom S3 (with filename sanitization) > MinIO > Local
           ...(S3_ACCESS_KEY_ID && S3_SECRET_ACCESS_KEY && S3_BUCKET && S3_ENDPOINT ? [{
-            resolve: '@medusajs/file-s3',
+            resolve: './src/modules/s3-file',
             id: 's3',
             options: {
               file_url: S3_FILE_URL,

@@ -11,6 +11,7 @@ import { Client } from 'minio';
 import path from 'path';
 import { ulid } from 'ulid';
 import { Readable } from 'stream';
+import { sanitizeFileName } from '../../utils/file-utils';
 
 type InjectedDependencies = {
   logger: Logger
@@ -190,8 +191,9 @@ class MinioFileProviderService extends AbstractFileProviderService {
     }
 
     try {
-      const parsedFilename = path.parse(file.filename)
-      const fileKey = `${parsedFilename.name}-${ulid()}${parsedFilename.ext}`
+      // Sanitize filename to prevent encoding issues with Chinese characters and special symbols
+      // This completely removes the original filename and generates a safe, unique identifier
+      const fileKey = sanitizeFileName(file.filename)
       
       // Handle different content types properly
       let content: Buffer
@@ -301,8 +303,9 @@ class MinioFileProviderService extends AbstractFileProviderService {
     }
 
     try {
-      // Use the filename directly as the key (matches S3 provider behavior for presigned uploads)
-      const fileKey = fileData.filename
+      // Sanitize filename to prevent encoding issues with Chinese characters and special symbols
+      // This ensures presigned URLs work correctly with S3-compatible storage
+      const fileKey = sanitizeFileName(fileData.filename)
 
       // Generate presigned PUT URL that expires in 15 minutes
       const url = await this.client.presignedPutObject(

@@ -44,6 +44,12 @@ dependencies:
   '@rokmohar/medusa-plugin-meilisearch':
     specifier: 1.3.5
     version: 1.3.5(@medusajs/admin-sdk@2.12.1)(@medusajs/cli@2.12.1)(@medusajs/framework@2.12.1)(@medusajs/icons@2.13.1)(@medusajs/medusa@2.12.1)(@medusajs/test-utils@2.12.1)(@medusajs/ui@4.1.1)(@mikro-orm/cli@6.4.3)(@mikro-orm/core@6.4.3)(@mikro-orm/knex@6.4.3)(@mikro-orm/migrations@6.4.3)(@mikro-orm/postgresql@6.4.3)(@tanstack/react-query@5.64.2)(awilix@8.0.1)(pg@8.18.0)
+  '@aws-sdk/client-s3':
+    specifier: ^3.700.0
+    version: 3.982.0
+  '@aws-sdk/s3-request-presigner':
+    specifier: ^3.700.0
+    version: 3.982.0
   medusajs-launch-utils:
     specifier: 0.0.18
     version: 0.0.18
